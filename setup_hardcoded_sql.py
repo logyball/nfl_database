@@ -1,4 +1,4 @@
-SCHEMANAME = "nflDb"
+SCHEMANAME = "nflDb" # env var?
 
 createSchema = """
     CREATE SCHEMA IF NOT EXISTS {0};
@@ -10,8 +10,7 @@ playerTableCreate = """
         Name            varchar,
         Position        varchar,
         BirthDate       date,
-        Height          varchar,
-        Weight          integer
+        Height          varchar
     );
 """.format(SCHEMANAME)
 
@@ -29,8 +28,7 @@ teamPlayerRelTableCreate = """
     CREATE TABLE IF NOT EXISTS {0}.TeamPlayerRel(
         PlayerId        varchar     NOT NULL REFERENCES {0}.Player(PlayerId), 
         TeamAbbr        varchar     NOT NULL REFERENCES {0}.Team(TeamAbbr), 
-        StartYear       integer, 
-        EndYear         integer,
+        StartYear       integer,
         PRIMARY KEY(PlayerId, TeamAbbr, StartYear)
     );
 """.format(SCHEMANAME)
