@@ -13,6 +13,8 @@ Make sure you have python3 and pip3 installed.  Prefereably have a virtual envir
     * `python get-pip.py`
 * Virtual Environment:
     * `python3 -m pip install --user virtualenv`
+    * `python3 -m virtualenv env`
+    * `source env/bin/activate`
 * Programmatic access to a __postgres__ database (username, password, db, port, host)
     * [Basic Postgres Setup Guide](https://www.techrepublic.com/blog/diy-it-guy/diy-a-postgresql-database-server-setup-anyone-can-handle/)
 
