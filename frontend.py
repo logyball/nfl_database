@@ -31,7 +31,8 @@ def coachQuestions():
 @app.route('/fanPlayerQuestions', methods=['POST'])
 def fanPlayerQuestions():
     questions = dict(request.form)
-    return "not yet implemented"
+    ans = fsh.answerFanPlayerQuestions(questions)
+    return render_template('fanPlayerAnswers.html', answers=ans)
 
 @app.route('/fanTeamQuestions', methods=['POST'])
 def fanTeamQuestions():

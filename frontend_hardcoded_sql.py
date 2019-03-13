@@ -28,6 +28,21 @@ teamWithBestRecordInConference = """
     LIMIT 1
 """
 
+whichTeamsForPlayer = """
+    SELECT T.Name as TeamName, TPR.StartYear as Year
+    FROM nflDb.TeamPlayerRel as TPR
+    NATURAL JOIN nflDb.Player as P
+    INNER JOIN nflDb.Team as T on TPR.TeamAbbr = T.TeamAbbr
+    WHERE P.Name = %s;
+"""
+
+playerCareerStats = """
+    SELECT *
+    FROM nflDb.playerCareerStats as PCS
+    INNER JOIN nflDb.Player as P ON P.playerid = PCS.playerid
+    WHERE P.Name = %s;
+"""
+
 teamWithBestRecordInDivision = """
     SELECT Name, Wins, Losses
     FROM {0}.TeamSeasonWithMetadata as TSM

@@ -4,5 +4,36 @@
     <img class="w3-right w3-image" src="{{ url_for('static', filename='fan2.jpg') }}">
 </div>
 <p>Fan Player Answers</p>
-
+<table class="w3-table w3-bordered">
+    <tr>
+        <th> Question </th>
+        <th> Answers </th>
+    </tr>
+    {% if answers['teamsPlayedOn'] %}
+        <tr>
+            <td>
+                {{answers['favPlayer']}} played on these teams:
+            </td>
+            <td>
+                {% for r in answers['teamsPlayedOn'] %}
+                    <p>{{r[0]}} in {{r[1]}}
+                    </p>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+    {% if answers['careerStats'] %}
+        <tr>
+            <td>
+                {{answers['favPlayer']}} has these lifetime stats:
+            </td>
+            <td>
+                {% for r in answers['careerStats'] %}
+                    <p>{{r}} -> {{answers['careerStats'][r]}}
+                    </p>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+</table>
 {% endblock %}

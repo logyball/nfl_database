@@ -25,12 +25,28 @@ def addTransaction(conn, sql_string):
         print(error)
         print(sql_string)
 
-# ensure acidity
 def fetchTransaction(conn, sql_string):
     results = []
     try:
         cursor = conn.cursor()
         cursor.execute(sql_string)
+        while True:
+            rows = cursor.fetchmany(MAXROWSTOFETCH)
+            if not rows:
+                break
+            results += rows
+        cursor.close()
+    except pgre.DatabaseError as error:
+        print(error)
+        print(sql_string)
+        return []
+    return results
+
+def fetchTransactionSafely(conn, sql_string, user_input):
+    results = []
+    try:
+        cursor = conn.cursor()
+        cursor.execute(sql_string, user_input)
         while True:
             rows = cursor.fetchmany(MAXROWSTOFETCH)
             if not rows:
@@ -88,6 +104,14 @@ def get5YearWeBeat(conn, team):
     )
     return fetchTransaction(conn, sql)
 
+def getTeamsPlayedOn(conn, pl):
+    user_input = (pl,)
+    return fetchTransactionSafely(conn, fhs.whichTeamsForPlayer, user_input)
+
+def getPlayerCareerStats(conn, pl):
+    user_input = (pl,)
+    return fetchTransactionSafely(conn, fhs.playerCareerStats, user_input)
+
 def answerCoachQuestions(qs):
     c = getConn()
     answers = {}
@@ -120,6 +144,51 @@ def answerFanTeamQuestions(qs):
         answers['fiveYrBU'] = get5YearBeatUs(c, team)
     if '5YearWeBeat' in qs.keys():
         answers['fiveYrWB'] = get5YearWeBeat(c, team)
+    print(answers)
+    c.close()
+    return answers
+
+def makeStatsIntelligable(statDict):
+    d = {}
+    if statDict[0][1]:
+        d['passAt'] = statDict[0][1]
+    if statDict[0][2]:
+        d['passCom'] = statDict[0][2]
+    if statDict[0][3]:
+        d['passYds'] = statDict[0][3]
+    if statDict[0][4]:
+        d['int'] = statDict[0][4]
+    if statDict[0][5]:
+        d['passtd'] = statDict[0][5]
+    if statDict[0][6]:
+        d['fumbles'] = statDict[0][6]
+    if statDict[0][7]:
+        d['rushAt'] = statDict[0][7]
+    if statDict[0][8]:
+        d['rushyd'] = statDict[0][8]
+    if statDict[0][9]:
+        d['rushtd'] = statDict[0][9]
+    if statDict[0][10]:
+        d['rec'] = statDict[0][10]
+    if statDict[0][11]:
+        d['rectds'] = statDict[0][11]
+    if statDict[0][12]:
+        d['recyds'] = statDict[0][12]
+    if statDict[0][13]:
+        d['fga'] = statDict[0][13]
+    if statDict[0][14]:
+        d['fgm'] = statDict[0][14]
+    return d
+
+def answerFanPlayerQuestions(qs):
+    c = getConn()
+    answers = {}
+    pl = qs['favPlayer']
+    if 'teamsPlayedOn' in qs.keys():
+        answers['teamsPlayedOn'] = getTeamsPlayedOn(c, pl)
+    if 'careerStats' in qs.keys():
+        answers['careerStats'] = makeStatsIntelligable(getPlayerCareerStats(c, pl))
+    answers['favPlayer'] = pl
     print(answers)
     c.close()
     return answers
