@@ -5,7 +5,7 @@ A simple NFL stats database with a lightwieght frontend.  Supports low-level log
 ## Setup
 
 #### Dependencies
-Make sure you have python3 and pip3 installed.  Prefereably have a virtual environment set up.
+Make sure you have python3 and pip3 installed.  Prefereably have a virtual environment set up.  Note this is tested on unix systems (macos/linux), I'm sure Windows will have a slightly different setup.
 
 * [Python3 Installation](https://www.python.org/downloads/)
 * Pip Installation: 
