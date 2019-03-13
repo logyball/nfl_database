@@ -20,7 +20,8 @@ def fanArea():
     tms = fsh.getTeams()
     conf = fsh.getConf()
     div = fsh.getDivs()
-    return render_template('fanArea.html', teams=tms, divs=div, confs=conf)
+    yrs = fsh.getYears()
+    return render_template('fanArea.html', teams=tms, divs=div, confs=conf, years=yrs)
 
 @app.route('/coachQuestions', methods=['POST'])
 def coachQuestions():

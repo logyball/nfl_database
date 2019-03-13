@@ -32,6 +32,7 @@ def init_table_setup(conn):
     sql_helpers.transaction(conn, setup_sql.fullScheduleDataCreate)
     sql_helpers.transaction(conn, setup_sql.customTeamFunction)
     sql_helpers.transaction(conn, setup_sql.customPlayerFunction)
+    sql_helpers.transaction(conn, setup_sql.createCoachImprovmentFunction)
 
 def addTeamsToDb(conn):
     teams = dc.addTeams(conn, STARTYEAR, ENDYEAR)

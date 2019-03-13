@@ -188,6 +188,9 @@ def answerFanTeamQuestions(qs):
         answers['fiveYrBU'] = get5YearBeatUs(c, team)
     if '5YearWeBeat' in qs.keys():
         answers['fiveYrWB'] = get5YearWeBeat(c, team)
+    if 'isCoachImproving' in qs.keys():
+        answers['isCoachImproving'] = getCoachImproving(c, team, qs['coachStartYear'])
+        answers['coachStartYear'] = qs['coachStartYear']
     print(answers)
     c.close()
     return answers

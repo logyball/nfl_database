@@ -254,11 +254,11 @@ createCoachImprovmentFunction = """
         c Varchar := '';
     BEGIN
         IF	a > b THEN
-            c := 'Improving';
+            c := 'Not Improving';
             RETURN QUERY SELECT
             a, b, c;
         ELSE
-            c := 'Not Improving';
+            c := 'Improving';
             RETURN QUERY SELECT
             a, b, c;
         END IF;
