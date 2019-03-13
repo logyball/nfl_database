@@ -105,3 +105,21 @@ def answerCoachQuestions(qs):
     print(answers)
     c.close()
     return answers
+
+def answerFanTeamQuestions(qs):
+    c = getConn()
+    answers = {}
+    team = qs['selectTeam']
+    if 'beatUs' in qs.keys():
+        answers['beatUs'] = getTeamsBeatUs(c, team)
+    if 'bestRecInConf' in qs.keys():
+        answers['bestConf'] = getBestConferenceTeam(c, team)
+    if 'bestRecInDiv' in qs.keys():
+        answers['bestDiv'] = getBestDivisionTeam(c, team)
+    if '5YearBeatUs' in qs.keys():
+        answers['fiveYrBU'] = get5YearBeatUs(c, team)
+    if '5YearWeBeat' in qs.keys():
+        answers['fiveYrWB'] = get5YearWeBeat(c, team)
+    print(answers)
+    c.close()
+    return answers

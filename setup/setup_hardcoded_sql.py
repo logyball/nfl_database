@@ -217,3 +217,21 @@ fullScheduleDataCreate = """
         NATURAL JOIN {0}.Schedule
     );
 """.format(SCHEMANAME)
+
+customTeamFunction = """
+    CREATE OR REPLACE FUNCTION {0}.addNewTeam(TeamAbbr VARCHAR, Name VARCHAR, Division VARCHAR, Conference VARCHAR) 
+    RETURNS void AS $$
+    BEGIN
+        INSERT INTO {0}.Team VALUES (TeamAbbr, Name, Division, Conference);
+    END;
+    $$ LANGUAGE plpgsql;
+""".format(SCHEMANAME)
+
+customPlayerFunction = """
+    CREATE OR REPLACE FUNCTION {0}.addNewPlayer(PlayerId VARCHAR, Name VARCHAR, Pos VARCHAR, BirthDate DATE, Height VARCHAR)
+    RETURNS void AS $$
+    BEGIN
+        INSERT INTO {0}.Player VALUES (PlayerId, Name, Pos, BirthDate, Height);
+    END;
+    $$ LANGUAGE plpgsql;
+""".format(SCHEMANAME)

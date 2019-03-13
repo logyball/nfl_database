@@ -30,8 +30,14 @@ def coachQuestions():
 
 @app.route('/fanPlayerQuestions', methods=['POST'])
 def fanPlayerQuestions():
+    questions = dict(request.form)
     return "not yet implemented"
 
 @app.route('/fanTeamQuestions', methods=['POST'])
 def fanTeamQuestions():
-    return "not yet implemented"
+    questions = dict(request.form)
+    splitTeam = questions['selectTeam'].split(',')
+    questions['selectTeam'] = splitTeam[0]
+    ans = fsh.answerFanTeamQuestions(questions)
+    ans['team'] = splitTeam[1]
+    return render_template('fanTeamAnswers.html', answers=ans)

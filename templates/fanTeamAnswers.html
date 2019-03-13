@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="w3-right">
+    <img class="w3-right w3-image" src="{{ url_for('static', filename='fan2.jpg') }}">
+</div>
+<p>Fan Team Answers</p>
+<p class="w3-xxlarge">{{answers['team']}}</p>
+<table class="w3-table w3-bordered">
+    <tr>
+        <th> Question </th>
+        <th> Answers </th>
+    </tr>
+    {% if answers['beatUs'] %}
+        <tr>
+            <td>
+                Here's who beat us last year:
+            </td>
+            <td>
+                {% for r in answers['beatUs'] %}
+                    <p>{{r[0]}} beat us, final score: {{r[1]}} - {{r[2]}}</p>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+    {% if answers['bestConf'] %}
+        <tr>
+            <td>
+                Best Conference Team Last Year:
+            </td>
+            <td>
+                {{answers['bestConf'][0][0]}}. <b>{{answers['bestConf'][0][1]}}</b> Wins and <b>{{answers['bestConf'][0][2]}}</b> Losses
+            </td>
+        </tr>
+    {% endif %}
+    {% if answers['bestDiv'] %}
+        <tr>
+            <td>
+                Best Division Team Last Year:
+            </td>
+            <td>
+                {{answers['bestDiv'][0][0]}}. <b>{{answers['bestDiv'][0][1]}}</b> Wins and <b>{{answers['bestDiv'][0][2]}}</b> Losses
+            </td>
+        </tr>
+    {% endif %}
+    {% if answers['fiveYrBU'] %}
+        <tr>
+            <td>
+                This team has beat us the most over the last five years:
+            </td>
+            <td>
+                {{answers['fiveYrBU'][0][1]}} with <b>{{answers['fiveYrBU'][0][0]}}</b> Victories
+            </td>
+        </tr>
+    {% endif %}
+    {% if answers['fiveYrWB'] %}
+        <tr>
+            <td>
+                We've beat this team the most over the last five years:
+            </td>
+            <td>
+                {{answers['fiveYrWB'][0][1]}} with <b>{{answers['fiveYrWB'][0][0]}}</b> Victories
+            </td>
+        </tr>
+    {% endif %}
+</table>
+{% endblock %}

@@ -28,6 +28,10 @@ def init_table_setup(conn):
     sql_helpers.transaction(conn, setup_sql.playerSeasonStatsTableCreate)
     sql_helpers.transaction(conn, setup_sql.playerCareerStatsTableCreate)
     sql_helpers.transaction(conn, setup_sql.addExtraTeamData)
+    sql_helpers.transaction(conn, setup_sql.teamSeasonWithMetadataViewCreate)
+    sql_helpers.transaction(conn, setup_sql.fullScheduleDataCreate)
+    sql_helpers.transaction(conn, setup_sql.customTeamFunction)
+    sql_helpers.transaction(conn, setup_sql.customPlayerFunction)
 
 def addTeamsToDb(conn):
     teams = dc.addTeams(conn, STARTYEAR, ENDYEAR)
