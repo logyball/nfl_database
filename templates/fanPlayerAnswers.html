@@ -4,6 +4,9 @@
     <img class="w3-right w3-image" src="{{ url_for('static', filename='fan2.jpg') }}">
 </div>
 <p>Fan Player Answers</p>
+{% if answers['favPlayer'] %}
+<p class='w3-xxxlarge w3-center w3-green'>{{answers['favPlayer']}}</p>
+{% endif %}
 <table class="w3-table w3-bordered">
     <tr>
         <th> Question </th>
@@ -22,6 +25,16 @@
             </td>
         </tr>
     {% endif %}
+    {% if answers['bestTeamRecord'] %}
+        <tr>
+            <td>
+                {{answers['favPlayer']}}'s best year:
+            </td>
+            <td>
+                <p>With the <b>{{answers['bestTeamRecord'][0][1]}} {{answers['bestTeamRecord'][0][0]}}</b> they went <b>{{answers['bestTeamRecord'][0][2]}} - {{answers['bestTeamRecord'][0][3]}}</b></p>
+            </td>
+        </tr>
+    {% endif %}
     {% if answers['careerStats'] %}
         <tr>
             <td>
@@ -30,6 +43,19 @@
             <td>
                 {% for r in answers['careerStats'] %}
                     <p>{{r}} -> {{answers['careerStats'][r]}}
+                    </p>
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+    {% if answers['seasonStats'] %}
+        <tr>
+            <td>
+                {{answers['favPlayer']}} had these stats last season:
+            </td>
+            <td>
+                {% for r in answers['seasonStats'] %}
+                    <p>{{r}} -> {{answers['seasonStats'][r]}}
                     </p>
                 {% endfor %}
             </td>

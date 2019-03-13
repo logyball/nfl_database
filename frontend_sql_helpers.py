@@ -112,6 +112,14 @@ def getPlayerCareerStats(conn, pl):
     user_input = (pl,)
     return fetchTransactionSafely(conn, fhs.playerCareerStats, user_input)
 
+def getPlayerSeasonStats(conn, pl):
+    user_input = (pl,)
+    return fetchTransactionSafely(conn, fhs.playerLastYearStats, user_input)
+
+def getBestTeamRecord(conn, pl):
+    user_input = (pl,pl)
+    return fetchTransactionSafely(conn, fhs.playerBestTeamByRec, user_input)
+
 def answerCoachQuestions(qs):
     c = getConn()
     answers = {}
@@ -150,34 +158,37 @@ def answerFanTeamQuestions(qs):
 
 def makeStatsIntelligable(statDict):
     d = {}
-    if statDict[0][1]:
-        d['passAt'] = statDict[0][1]
-    if statDict[0][2]:
-        d['passCom'] = statDict[0][2]
-    if statDict[0][3]:
-        d['passYds'] = statDict[0][3]
-    if statDict[0][4]:
-        d['int'] = statDict[0][4]
-    if statDict[0][5]:
-        d['passtd'] = statDict[0][5]
-    if statDict[0][6]:
-        d['fumbles'] = statDict[0][6]
-    if statDict[0][7]:
-        d['rushAt'] = statDict[0][7]
-    if statDict[0][8]:
-        d['rushyd'] = statDict[0][8]
-    if statDict[0][9]:
-        d['rushtd'] = statDict[0][9]
-    if statDict[0][10]:
-        d['rec'] = statDict[0][10]
-    if statDict[0][11]:
-        d['rectds'] = statDict[0][11]
-    if statDict[0][12]:
-        d['recyds'] = statDict[0][12]
-    if statDict[0][13]:
-        d['fga'] = statDict[0][13]
-    if statDict[0][14]:
-        d['fgm'] = statDict[0][14]
+    try:
+        if statDict[0][1]:
+            d['passAt'] = statDict[0][1]
+        if statDict[0][2]:
+            d['passCom'] = statDict[0][2]
+        if statDict[0][3]:
+            d['passYds'] = statDict[0][3]
+        if statDict[0][4]:
+            d['int'] = statDict[0][4]
+        if statDict[0][5]:
+            d['passtd'] = statDict[0][5]
+        if statDict[0][6]:
+            d['fumbles'] = statDict[0][6]
+        if statDict[0][7]:
+            d['rushAt'] = statDict[0][7]
+        if statDict[0][8]:
+            d['rushyd'] = statDict[0][8]
+        if statDict[0][9]:
+            d['rushtd'] = statDict[0][9]
+        if statDict[0][10]:
+            d['rec'] = statDict[0][10]
+        if statDict[0][11]:
+            d['rectds'] = statDict[0][11]
+        if statDict[0][12]:
+            d['recyds'] = statDict[0][12]
+        if statDict[0][13]:
+            d['fga'] = statDict[0][13]
+        if statDict[0][14]:
+            d['fgm'] = statDict[0][14]
+    except IndexError as e:
+        print(e)
     return d
 
 def answerFanPlayerQuestions(qs):
@@ -188,6 +199,10 @@ def answerFanPlayerQuestions(qs):
         answers['teamsPlayedOn'] = getTeamsPlayedOn(c, pl)
     if 'careerStats' in qs.keys():
         answers['careerStats'] = makeStatsIntelligable(getPlayerCareerStats(c, pl))
+    if 'seasonStats' in qs.keys():
+        answers['seasonStats'] = makeStatsIntelligable(getPlayerSeasonStats(c, pl))
+    if 'bestTeamRecord' in qs.keys():
+        answers['bestTeamRecord'] = getBestTeamRecord(c, pl)
     answers['favPlayer'] = pl
     print(answers)
     c.close()

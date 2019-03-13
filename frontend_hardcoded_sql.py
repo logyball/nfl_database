@@ -43,6 +43,28 @@ playerCareerStats = """
     WHERE P.Name = %s;
 """
 
+playerLastYearStats = """
+    SELECT PSS.playerid, PSS.PassAttempts, PSS.PassCompletions, PSS.PassYds, PSS.Interceptions, PSS.PassTds, PSS.Fumbles, PSS.RushAttempts, PSS.RushYds, PSS.RushTds, PSS.Receptions, PSS.RecTds, PSS.RecYds, PSS.FgAttempts, PSS.FgMade  
+    FROM nflDb.playerSeasonStats as PSS
+    INNER JOIN nflDb.Player as P ON P.playerid = PSS.playerid
+    WHERE P.Name = %s AND PSS.year = 2017;
+"""
+
+playerBestTeamByRec = """
+    SELECT DISTINCT T.Name, TSS.Year, TSS.Wins, TSS.Losses
+    FROM nflDb.TeamPlayerRel as TPR
+    NATURAL JOIN nflDb.Player AS P
+    INNER JOIN nfldb.teamSeasonStats as TSS ON TSS.teamAbbr = TPR.TeamAbbr
+    INNER JOIN nfldb.team as T ON TSS.teamAbbr = T.TeamAbbr
+    WHERE P.name = %s and TSS.Wins =
+
+    (SELECT MAX(TSS.wins)
+    FROM nflDb.TeamPlayerRel as TPR
+    NATURAL JOIN nflDb.Player AS P
+    INNER JOIN nfldb.teamSeasonStats as TSS ON TSS.teamAbbr = TPR.TeamAbbr
+    WHERE P.name = %s);
+"""
+
 teamWithBestRecordInDivision = """
     SELECT Name, Wins, Losses
     FROM {0}.TeamSeasonWithMetadata as TSM
