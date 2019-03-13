@@ -1,6 +1,6 @@
 # Nfl Statistics DB
 
-A simple NFL stats database with a lightwieght frontend.  Supports low-level logical queries.  Dependent on the fine data from sports-reference.com. BIG Shoutout to [@roclark](https://github.com/roclark) and the [sportsreference python package](https://github.com/roclark/sportsreference) as this is the entire backbone of this project.  Big shoutout as well to the good people at [https://www.pro-football-reference.com/](Sports Reference NFL Division), and especially [@KennyJackelen](https://github.com/kennyjackelen) as this is where the data originally comes from. [Follow him on Twitter](https://twitter.com/kennyjackelen?lang=en).
+A simple NFL stats database with a lightwieght frontend.  Supports low-level logical queries.  Dependent on the fine data from sports-reference.com. BIG Shoutout to [@roclark](https://github.com/roclark) and the [sportsreference python package](https://github.com/roclark/sportsreference) as this is the entire backbone of this project.  Big shoutout as well to the good people at [https://www.pro-football-reference.com](Sports Reference NFL Division), and especially [@KennyJackelen](https://github.com/kennyjackelen) as this is where the data originally comes from. [Follow him on Twitter](https://twitter.com/kennyjackelen?lang=en).
 
 ## Setup
 
