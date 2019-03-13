@@ -83,6 +83,13 @@ def getConf():
     c.close()
     return res
 
+def getYears():
+    c = getConn()
+    sql = fhs.getYears.format(SCHEMANAME)
+    res = fetchTransaction(c, sql)
+    c.close()
+    return res
+
 def getTeamsBeatUs(conn, team):
     sql = fhs.teamsWhoBeatUs.format(
         SCHEMANAME,
@@ -134,6 +141,18 @@ def getBestTeamRecord(conn, pl):
     user_input = (pl,pl)
     return fetchTransactionSafely(conn, fhs.playerBestTeamByRec, user_input)
 
+def getCoachImproving(conn, team, year):
+    row = []
+    try:
+        cursor = conn.cursor()
+        cursor.callproc('nflDb.GetCoachImprovment', (team, year))
+        row = cursor.fetchall()
+        cursor.close()
+        conn.commit()
+    except pgre.DatabaseError as error:
+        print(error)
+    return row
+
 def answerCoachQuestions(qs):
     c = getConn()
     answers = {}
@@ -148,6 +167,9 @@ def answerCoachQuestions(qs):
         answers['fiveYrBU'] = get5YearBeatUs(c, team)
     if '5YearWeBeat' in qs.keys():
         answers['fiveYrWB'] = get5YearWeBeat(c, team)
+    if 'isCoachImproving' in qs.keys():
+        answers['isCoachImproving'] = getCoachImproving(c, team, qs['coachStartYear'])
+        answers['coachStartYear'] = qs['coachStartYear']
     print(answers)
     c.close()
     return answers

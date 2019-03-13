@@ -62,5 +62,15 @@
             </td>
         </tr>
     {% endif %}
+    {% if answers['isCoachImproving'] %}
+        <tr>
+            <td>
+                Is the coach improving since {{answers['coachStartYear']}}?
+            </td>
+            <td>
+                <b>{{ answers['isCoachImproving'][0][2] }}</b> - They have an average of <B> {{ answers['isCoachImproving'][0][1] }} </B> wins per season, and had <B> {{ answers['isCoachImproving'][0][0] }} </B> wins the year they started. 
+            </td>
+        </tr>
+    {% endif %}
 </table>
 {% endblock %}

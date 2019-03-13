@@ -12,7 +12,8 @@ def home():
 @app.route('/coachArea')
 def coachArea():
     tms = fsh.getTeams()
-    return render_template('coachArea.html', teams=tms)
+    yrs = fsh.getYears()
+    return render_template('coachArea.html', teams=tms, years=yrs)
 
 @app.route('/fanArea')
 def fanArea():

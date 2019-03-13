@@ -13,6 +13,12 @@ getConf = """
     FROM {0}.team;
 """
 
+getYears = """
+    SELECT DISTINCT Year
+    FROM {0}.TeamSeasonStats
+    ORDER BY Year;
+"""
+
 teamsWhoBeatUs = """
     SELECT Tm.Name, SUB.HomeScore, SUB.AwayScore
     FROM {0}.Team as TM

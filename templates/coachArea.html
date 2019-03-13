@@ -28,6 +28,12 @@
                 <input class="w3-checkbox" type="checkbox" name="bestRecInDiv" value="true">Which team in our division had the best record last year?<br>
                 <input class="w3-checkbox" type="checkbox" name="5YearBeatUs" value="true">Which team has beaten us the most in the last 5 years?<br>
                 <input class="w3-checkbox" type="checkbox" name="5YearWeBeat" value="true">Which team have we beaten the most in the last 5 years?<br>
+                <input class="w3-checkbox" type="checkbox" name="isCoachImproving" value="true">Am I improving over my tenure? Select start year: <br>
+                <select name='coachStartYear'>
+                    {% for y in years %}
+                    <option value="{{y[0]}}">{{ y[0] }}</option>
+                    {% endfor %}
+                </select>
             </td>
         </tr>
     </table>

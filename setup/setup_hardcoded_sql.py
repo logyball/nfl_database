@@ -235,3 +235,33 @@ customPlayerFunction = """
     END;
     $$ LANGUAGE plpgsql;
 """.format(SCHEMANAME)
+
+createCoachImprovmentFunction = """
+    CREATE OR REPLACE FUNCTION nflDb.GetCoachImprovment (teamInput VARCHAR, yearInput Integer) 
+	RETURNS TABLE (
+		Wins Integer,
+		AvgWins Integer,
+		Improvement Varchar
+	) 
+    AS $$
+    DECLARE
+        a Integer := (SELECT TeamSeasonStats.Wins
+            FROM nflDb.TeamSeasonStats
+            WHERE TeamSeasonStats.TeamAbbr=teamInput AND TeamSeasonStats.Year = yearInput);
+        b Integer := (SELECT AVG(TeamSeasonStats.Wins)
+            FROM nflDb.TeamSeasonStats
+            WHERE TeamSeasonStats.TeamAbbr=teamInput AND TeamSeasonStats.Year > yearInput);
+        c Varchar := '';
+    BEGIN
+        IF	a > b THEN
+            c := 'Improving';
+            RETURN QUERY SELECT
+            a, b, c;
+        ELSE
+            c := 'Not Improving';
+            RETURN QUERY SELECT
+            a, b, c;
+        END IF;
+    END; $$
+    LANGUAGE 'plpgsql';
+"""
