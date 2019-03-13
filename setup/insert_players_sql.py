@@ -1,4 +1,4 @@
-SCHEMANAME = "nflDb" # env var?
+SCHEMANAME = "nfldb" # env var?
 
 addQbSeasonStat = """
     INSERT INTO {0}.playerseasonstats(
