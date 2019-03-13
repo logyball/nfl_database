@@ -2,14 +2,15 @@ import psycopg2 as pgre
 import setup_hardcoded_sql as setup_sql
 import sql_helpers
 import data_collection as dc
+from os import environ
 
-DB          = 'postgres'    # env var
-USER        = 'postgres'    # env var
-PASS        = 'admin'       # env var
-HOST        = 'localhost'   # env var
-PORT        = '5432'        # env var
-STARTYEAR   = 2010          # ENV VAR?
-ENDYEAR     = 2019          # ENV VAR?
+DB          = environ['PGDB']
+USER        = environ['PGUSERNAME']
+PASS        = environ['PGPASSWORD']
+HOST        = environ['PGHOST']
+PORT        = environ['PGPORT']
+STARTYEAR   = environ['NFLDBSTARTYEAR']
+ENDYEAR     = environ['NFLDBENDYEAR']
 
 
 # the first time this is run on a local computer, we'll

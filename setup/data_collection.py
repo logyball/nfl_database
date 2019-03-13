@@ -23,7 +23,7 @@ def getPlayerPerGameInfo(conn, boxsc):
         playerPerGameHelper(conn, player)
         
 def getGameInfo(conn, gm, year):
-    print("new Game")
+    print("new Game %s" % gm)
     boxsc = box(gm.boxscore_index)
     getPlayerPerGameInfo(conn, boxsc)
     sqhelp.addGameStats(conn, boxsc, gm)

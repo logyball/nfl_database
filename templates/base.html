@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        Logan's NFL DB
+    </title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">    
+</head>
+<body>
+    <div class="w3-bar w3-black w3-margin-bottom">
+        <a href="/" class="w3-bar-item w3-button">Home</a>
+        <div class='w3-center'>
+            <span class="w3-bar-item w3-white">Logan's NFL DB</span>
+        </div>
+        <div class="w3-right">
+            <a href="{{ url_for('coachArea') }}" class="w3-bar-item w3-button">Coach Area</a>
+            <a href="{{ url_for('fanArea') }}" class="ww3-bar-item w3-button">Fan Area</a>
+        </div>
+    </div>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

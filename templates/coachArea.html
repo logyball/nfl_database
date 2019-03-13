@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block body %}
+<div class="w3-right">
+    <img class="w3-right w3-image" src="{{ url_for('static', filename='bill.jpg') }}">
+</div>
+<p class="w3-xxlarge">Coach area</p>
+<form action="{{ url_for('coachQuestions') }}" method="POST">
+    <table class="w3-table w3-bordered">
+        <tr>
+            <th> Question </th>
+            <th> Input </th>
+        </tr>
+        <tr>
+            <td> Which team do you coach? </td>
+            <td> 
+                <select name='selectTeam'>
+                    {% for t in teams %}
+                    <option value="{{t[1]}},{{t[0]}}">{{ t[0] }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr id="questions">
+            <td> Which questions do you want answered? </td>
+            <td>
+                <input class="w3-checkbox" type="checkbox" name="beatUs" value="true">Who beat us last year?<br>
+                <input class="w3-checkbox" type="checkbox" name="bestRecInConf" value="true">Which team in our conference had the best record last year?<br>
+                <input class="w3-checkbox" type="checkbox" name="bestRecInDiv" value="true">Which team in our division had the best record last year?<br>
+                <input class="w3-checkbox" type="checkbox" name="5YearBeatUs" value="true">Which team has beaten us the most in the last 5 years?<br>
+                <input class="w3-checkbox" type="checkbox" name="5YearWeBeat" value="true">Which team have we beaten the most in the last 5 years?<br>
+            </td>
+        </tr>
+    </table>
+    <button class="w3-button w3-black w3-round-xlarge w3-hover-red" type="submit">Answer Questions</button>
+</form>
+{% endblock %}

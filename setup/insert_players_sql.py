@@ -1,4 +1,6 @@
-SCHEMANAME = "nfldb" # env var?
+from os import environ
+
+SCHEMANAME = environ['NFLSUBDB']
 
 addQbSeasonStat = """
     INSERT INTO {0}.playerseasonstats(

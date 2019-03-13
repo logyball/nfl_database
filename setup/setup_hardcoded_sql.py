@@ -1,4 +1,6 @@
-SCHEMANAME = "nflDb" # env var?
+from os import environ
+
+SCHEMANAME = environ['NFLSUBDB']
 
 createSchema = """
     CREATE SCHEMA IF NOT EXISTS {0};
@@ -198,4 +200,20 @@ addExtraTeamData = """
         ('SEA', 'NFC West', 'NFC')
         ) AS info(TeamAbbr, Division, Conference)
     WHERE team.TeamAbbr = info.TeamAbbr;
+""".format(SCHEMANAME)
+
+teamSeasonWithMetadataViewCreate = """
+    CREATE VIEW {0}.TeamSeasonWithMetadata AS (
+        SELECT *
+        FROM {0}.Team
+        NATURAL JOIN {0}.TeamSeasonStats
+    );
+""".format(SCHEMANAME)
+
+fullScheduleDataCreate = """
+    CREATE VIEW {0}.FullScheduleData AS (
+        SELECT *
+        FROM {0}.Game
+        NATURAL JOIN {0}.Schedule
+    );
 """.format(SCHEMANAME)

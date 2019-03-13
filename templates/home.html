@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<ul class='w3-ul'>
+    <li class='w3-xxlarge'>Choose where to go!</li>
+    <li><a href="{{ url_for('coachArea') }}" class="w3-button">Go to the Coach Area</a></li>
+    <li><a href="{{ url_for('fanArea') }}" class="w3-button">Go to the Fan Area</a></li>
+</ul>
+
+{% endblock %}
