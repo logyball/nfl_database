@@ -1,6 +1,6 @@
 #! /bin/bash
 
-pip install -r setup/requirements.txt
+pip install -r requirements.txt
 
 echo 'Make a choice:'
 echo '    1. Intial DB setup (WARNING THIS TAKES A LONG TIME ONLY RUN ONCE!)'
