@@ -69,6 +69,20 @@ def getTeams():
     c.close()
     return res
 
+def getDivs():
+    c = getConn()
+    sql = fhs.getDivs.format(SCHEMANAME)
+    res = fetchTransaction(c, sql)
+    c.close()
+    return res
+
+def getConf():
+    c = getConn()
+    sql = fhs.getConf.format(SCHEMANAME)
+    res = fetchTransaction(c, sql)
+    c.close()
+    return res
+
 def getTeamsBeatUs(conn, team):
     sql = fhs.teamsWhoBeatUs.format(
         SCHEMANAME,
@@ -191,6 +205,25 @@ def makeStatsIntelligable(statDict):
         print(e)
     return d
 
+def makeCustomTeam(conn, name, abbr, div, conf):
+    try:
+        cursor = conn.cursor()
+        cursor.callproc('nflDb.addNewTeam', (abbr, name, div, conf))
+        cursor.close()
+        conn.commit()
+    except pgre.DatabaseError as error:
+        print(error)
+
+def makeCustomPlayer(conn, pid, pname, pos):
+    try:
+        cursor = conn.cursor()
+        cursor.callproc('nflDb.addNewPlayer', (pid, pname, pos, '1-1-90', '5-10'))
+        cursor.close()
+        conn.commit()
+    except pgre.DatabaseError as error:
+        print(error)
+
+
 def answerFanPlayerQuestions(qs):
     c = getConn()
     answers = {}
@@ -203,6 +236,10 @@ def answerFanPlayerQuestions(qs):
         answers['seasonStats'] = makeStatsIntelligable(getPlayerSeasonStats(c, pl))
     if 'bestTeamRecord' in qs.keys():
         answers['bestTeamRecord'] = getBestTeamRecord(c, pl)
+    if 'custTeam' in qs.keys():
+        makeCustomTeam(c, qs['custTeam'], qs['custTeamAbbr'], qs['custTeamDivs'], qs['custTeamConfs'])
+    if 'custPlayer' in qs.keys():
+        makeCustomPlayer(c, qs['custPlayer'], qs['custPlayerName'], qs['custPlayerPos'])
     answers['favPlayer'] = pl
     print(answers)
     c.close()

@@ -17,7 +17,9 @@ def coachArea():
 @app.route('/fanArea')
 def fanArea():
     tms = fsh.getTeams()
-    return render_template('fanArea.html', teams=tms)
+    conf = fsh.getConf()
+    div = fsh.getDivs()
+    return render_template('fanArea.html', teams=tms, divs=div, confs=conf)
 
 @app.route('/coachQuestions', methods=['POST'])
 def coachQuestions():

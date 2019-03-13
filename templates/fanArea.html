@@ -25,6 +25,84 @@
                 <input class="w3-checkbox" type="checkbox" name="seasonStats" value="true">Their stats for last year<br>
             </td>
         </tr>
+        <tr>
+            <td class="w3-bold"> Create Custom Team? </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            Team Name: 
+                        </td>
+                        <td>
+                            <input class="w3-text" type="text" name="custTeam">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Team Abbreviation: 
+                        </td>
+                        <td>
+                            <input class="w3-text" type="text" name="custTeamAbbr">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Team Division: 
+                        </td>
+                        <td>
+                            <select name='custTeamDivs'>
+                                {% for d in divs %}
+                                <option value="{{d[0]}}">{{ d[0] }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Team Conference: 
+                        </td>
+                        <td>
+                            <select name='custTeamConfs'>
+                                {% for c in confs %}
+                                <option value="{{c[0]}}">{{ c[0] }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td class="w3-bold"> Create Custom Player? </td>
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            Player Id: 
+                        </td>
+                        <td>
+                            <input class="w3-text" type="text" name="custPlayer">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Player Name: 
+                        </td>
+                        <td>
+                            <input class="w3-text" type="text" name="custPlayerName">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Player Position: 
+                        </td>
+                        <td>
+                            <input class="w3-text" type="text" name="custPlayerPos">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
     </table>
     <button class="w3-button w3-black w3-round-xlarge w3-hover-red" type="submit">Answer Player Questions</button>
 </form>

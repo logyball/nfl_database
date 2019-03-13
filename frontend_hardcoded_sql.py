@@ -3,6 +3,16 @@ getTeams = """
     FROM {0}.team;
 """
 
+getDivs = """
+    SELECT DISTINCT Division
+    FROM {0}.team;
+"""
+
+getConf = """
+    SELECT DISTINCT Conference
+    FROM {0}.team;
+"""
+
 teamsWhoBeatUs = """
     SELECT Tm.Name, SUB.HomeScore, SUB.AwayScore
     FROM {0}.Team as TM
