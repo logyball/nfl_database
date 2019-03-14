@@ -151,7 +151,8 @@ addExtraTeams = """
     ('IDK', 'ERROR TEAM')
 """.format(SCHEMANAME)
 
-# have to add this manually because sportsreference sucks
+# have to add this manually because sportsreference 
+# doesn't have this info
 addExtraTeamData = """
     UPDATE {0}.team set
         Division = info.Division,
